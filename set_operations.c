@@ -1,19 +1,22 @@
 #include <stdio.h>
 int SIZE;
+
 void accept(int *ptr);
 void display(int *p,int n);
 int Union(int *p,int *q,int *un);
 void intersection(int *a,int *b);
 int difference(int *a,int *b,int *d);
-void symdiff(int *p,int *q);
+int symdifference(int *a,int *b,int *p,int *q,int *sd);
 
 int main(void)
 {
   int here;
+  int k;
   int choice;
   printf("Enter the size of both the arrays: ");
   scanf("%d",&SIZE);
-  int a[SIZE],b[SIZE],n,u[SIZE],intersect[SIZE],diff[SIZE];
+  int a[SIZE],b[SIZE],n,u[SIZE],intersect[SIZE],diff[SIZE],sd[2*SIZE];
+  int p[SIZE],q[SIZE];
   
 
   printf("Enter set A elements ");
@@ -44,15 +47,18 @@ switch(choice)
         goto here;
 
         case 3: printf("\nThe Difference of A-B is: ");
-        difference(a,b,diff);
+        k=difference(a,b,diff);
+        display(diff,k);
         goto here;
       
         case 4: printf("\nThe Difference of B-A is: ");
-        difference(b,a,diff);
+        k=difference(b,a,diff);
+        display(diff,k);
         goto here;
 
         case 5: printf("\nThe symmetric difference is: ");
-        symdiff(a,b);
+        k=symdifference(a,b,p,q,sd);
+        display(sd,k);
         goto here;
 
         case 6: printf("*****The program ends here*****");
@@ -154,50 +160,26 @@ int difference(int *a,int *b,int *d)
     k++;
   }
   }
-  display(d,k);
-  return 0;
+  
+  return k;
 }
 
-void symdiff(int *p, int *q)
+int symdifference(int *a,int *b,int *p,int *q,int *sd)
 {
-    int k = 0;
-    int size = 0;
-    int temp[2 * SIZE];
-    for (int i = 0; i < SIZE; i++)
-    {
-        k = 0;
-        for (int j = 0; j < SIZE; j++)
-        {
-            if (p[i] != q[j])
-            {
-                k++;
-            }
-        }
-        if (k == SIZE)
-        {
-            temp[size] = p[i];
-            size++;
-        }
-    }
-    for (int i = 0; i < SIZE; i++)
-    {
-        k = 0;
-        for (int j = 0; j < SIZE; j++)
-        {
-            if (q[i] != p[j])
-            {
-                k++;
-            }
-        }
-        if (k == SIZE)
-        {
-            temp[size] = q[i];
-            size++;
-        }
-    }
-    for (int i = size; i < 2 * SIZE; i++)
-    {
-        temp[i] = 0;
-    }
-    display(temp, size);
+  int m,n,k=0;
+  m=difference(a,b,p);
+  for(int i=0;i<m;i++)
+  {
+    *(sd+k)=*(p+i);
+    k++;
+  }
+  
+  n=difference(b,a,q);
+  for(int i=0;i<n;i++)
+  {
+    *(sd+k)=*(q+i);
+    k++;
+  }
+
+  return k;
 }
