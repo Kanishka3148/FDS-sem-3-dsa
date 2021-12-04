@@ -98,9 +98,12 @@ printf("\nEnter country to display number of bowlers: ");
 scanf("%s", cntry);
 for(int i=0; i<n; i++)
 {
+if(i==0)
+{
+    printf("Name \tCountry \tCategory \tAge \tOdi \t20-20s \tBatscore \tWickets\n");
+}
 if((strcmp(cntry,a[i].country)==0)&&(strcmp("bowler",a[i].category)==0))
 {
-printf("Name \tCountry \tCategory \tAge \tOdi \t20-20s \tBatscore \tWickets\n");
 printf("%s \t\t%s \t\t%s \t\t%-6d ",a[i].name, a[i].country,a[i].category, a[i].age);
 printf("\t%-4d \t%-4d \t%-4d \t\t%d\n",a[i].odi,a[i].twenty ,a[i].batscore, a[i].wkts);
 ctr++;
