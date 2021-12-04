@@ -13,7 +13,6 @@ void bowl_country(struct cricket a[]);
 void maxwickets(struct cricket a[]);
 void display_one(struct cricket a[]);
 void max_avg_score(struct cricket a[]);
-void display(struct cricket a[],char k[]);
 int main()
 {
 struct cricket s[10];
